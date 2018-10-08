@@ -143,6 +143,22 @@ body{
 .show {display: block;}
 
  }
+
+ .search {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #63c8c9;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+}
+.searchButton{
+    background:white;
+    border:none;
+}
+
+
+
 </style>
 </head>
 <body>
@@ -151,7 +167,7 @@ body{
   
   <div id="app">
   <nav class="navbar navbar-expand-md navbar-light">
-  <b><a href="{{url('/home')}}" class="blogname">Food Clever</a></b></font>
+  <b><a href="{{url('/foodPage')}}" class="blogname">Food Clever</a></b></font>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -165,8 +181,15 @@ body{
                             <li><a class="text" href="{{ route('login') }}"><font size="5" >LOGIN</font></a>&emsp;&nbsp;&nbsp;</li>
                             <li><a class="text" href="{{ route('register') }}"><font size="5">REGISTER</font></a></li>
                         @else
+                        <form method="POST" action="{{url('/searchRecipe')}}">
+                        @csrf
+                        <input type="text" id="searchRecipe" name="searchRecipe" class="search"  placeholder="Search recipe here.....">
+                        <button class="searchButton"><img  class="profile" src="{{ asset('images/searchicon.png') }}" height="24" width="20"> </button>
+                        </form>
+                        
                         <div class="icon-bar">
                         <a href="{{url('/home')}}" class="headerText">Home</a>
+                        <a href="{{url('/foodPage')}}" class="headerText">Recipes</a>
                         </div>                     
                         
                         </div>
@@ -184,6 +207,11 @@ body{
                                     
 
                              <div id="myDropdown" class="dropdown-content">
+                             <a class="dropdown-item" href="{{ route('myPosts') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('myposts-form').submit();">
+                                        {{ __('Dashboard') }}
+                                    </a>
                                     <!-- link to update profile details -->
                                     @foreach($profile as $profiles)
                                     <a class="dropdown-item" href="{{url('/updateProfile/'.$profiles['id'].'/edit')}}">
@@ -200,6 +228,9 @@ body{
 
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="GET" style="display: none;">
+                                        @csrf
+                                    </form>
+                                    <form id="myposts-form" action="{{ route('myPosts') }}" method="GET" style="display: none;">
                                         @csrf
                                     </form>
 

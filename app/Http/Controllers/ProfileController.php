@@ -39,7 +39,7 @@ class ProfileController extends Controller
             "email"=>$request->input('email'),
             ]);
         
-              $picture = $request->file('picture');
+        $picture = $request->file('picture');
 
         if($request->hasfile('picture')){
         //delete existing profile

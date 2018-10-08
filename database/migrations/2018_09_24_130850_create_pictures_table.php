@@ -15,7 +15,7 @@ class CreatePicturesTable extends Migration
     {
         Schema::create('pictures', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('filename',100);
+            $table->string('filename',300);
             $table->integer('user_fk')->unsigned();
             $table->foreign('user_fk')->references('id')->on('users'); 
             $table->timestamps();

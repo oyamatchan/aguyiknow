@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuotesTable extends Migration
+class CreateRecipesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateQuotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('quotes', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('recipes', function (Blueprint $table) {
+            $table->increments('rid');
             $table->string('filename',100);
-            $table->string('foodName',100);
-            $table->string('foodQuote',100);
+            $table->string('foodName',300);
+            $table->string('foodRecipe',1000);
             $table->integer('user_fk')->unsigned();
             $table->foreign('user_fk')->references('id')->on('users'); 
             $table->timestamps();
@@ -31,6 +31,6 @@ class CreateQuotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quotes');
+        Schema::dropIfExists('recipes');
     }
 }

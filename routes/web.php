@@ -10,13 +10,29 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::middleware(['auth'])->group(function(){
-    Route::get('/profile','HomeController@viewProfile');
-    // Route::view('/viewProfile','profile.profile')->name('viewProfile');
+    //view all post recipes
     Route::get('/foodPage','HomeController@foodPage')->name('foodPage');
+    //view your posts
+    Route::get('/foodPage/myposts','HomeController@viewMyPosts')->name('myPosts');
+    //edit your post
+    Route::get('/recipe/{rid}/edit','HomeController@editRecipe');
+    Route::post('/recipe/{rid}/update','HomeController@updateRecipe'); 
+    //delete posted recipe
+    Route::get('/recipe/{rid}/delete','HomeController@deleteRecipe');
+
+    //view recipe
+    Route::get('/foodPage/{id}/view','HomeController@viewRecipe');
+    //update profile details
     Route::get('/updateProfile/{id}/edit','ProfileController@updateProfile')->name('updateProfile');
-    Route::post('/updateProfile/{id}/save','ProfileController@saveProfile');
-    Route::post('/shareQuote/save','HomeController@saveQuote');
+    //save profile update
+    Route::post('/updateProfile/{rid}/save','ProfileController@saveProfile');
+    //share/save your recipe
+    Route::post('/shareRecipe/save','HomeController@saveRecipe');
+    //search for a recipe
+    Route::post('/searchRecipe','HomeController@searchRecipe');
+
 
     
 });
